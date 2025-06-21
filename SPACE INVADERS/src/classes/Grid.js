@@ -5,7 +5,7 @@ class Grid {
         this.rows = rows; // Número de linhas
         this.cols = cols; // Número de colunas
         this.invaders = this.init(); // Array para armazenar os invasores
-        this.invadersVelocity = 2; // Velocidade dos invasores
+        this.invadersVelocity = 1; // Velocidade dos invasores
         this.direction = "right"; // Direção inicial dos invasores
         this.moveDown = false
     }
@@ -31,7 +31,8 @@ class Grid {
         });
     }
 
-    update(){
+    update(playerStatus){
+
         if (this.reachedRightBoundary()){
             this.direction = "left";
             this.moveDown = true;
@@ -40,10 +41,13 @@ class Grid {
             this.moveDown = true;
         }
 
+        // Verifica se o jogador está vivo antes de atualizar os invasores
+        if (playerStatus.alive === false) this.moveDown = false;
+
         this.invaders.forEach((invader) => {
             if (this.moveDown) {
                 invader.moveDown();
-                invader.incrementVelocity(0.5)
+                invader.incrementVelocity(0.2)
                 this.invadersVelocity = invader.velocity; // Atualiza a velocidade dos invasores
             }
 
@@ -69,6 +73,11 @@ class Grid {
     getRandomInvader() {
         const index = Math.floor(Math.random() * this.invaders.length);
         return this.invaders[index];
+    }
+
+    restart () {
+        this.invaders = this.init(); // Reinicializa os invasores
+        this.direction = "right"; // Reseta a direção
     }
 }
 export default Grid;

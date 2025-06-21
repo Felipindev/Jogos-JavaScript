@@ -5,7 +5,7 @@ class Invader {
     constructor(position, velocity) {
         this.width = 50 * 0.8; // Largura do invasor
         this.height = 37 * 0.8; // Altura do invasor
-        this.velocity = velocity || 2
+        this.velocity = velocity || 1
         this.position = position
         this.image = this.getImage(PATH_INVADER_IMAGE);
     }

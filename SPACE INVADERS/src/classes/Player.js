@@ -3,6 +3,7 @@ import Projectile from "./Projectile.js";
 
 class Player {
     constructor(canvasWidth, canvasHeight) {
+        this.alive = true; // Indica se o jogador está vivo
         this.width = 48 * 2; 
         this.height = 48 * 2; 
         this.velocity = 6
@@ -71,6 +72,15 @@ class Player {
             -10
         )
         projectiles.push(p);
+    }
+
+    hit(projectile){
+        return (
+            projectile.position.x >= this.position.x + 10 && 
+            projectile.position.x <= this.position.x + this.width - 15 &&
+            projectile.position.y >= this.position.y + 15 &&
+            projectile.position.y <= this.position.y + this.height - 10
+        )
     }
 }
 
