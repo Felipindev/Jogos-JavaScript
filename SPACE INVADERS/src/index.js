@@ -1,3 +1,5 @@
+import Grid from "./classes/Grid.js";
+import Invader from "./classes/Invader.js";
 import Player from "./classes/Player.js";
 import Projectile from "./classes/Projectile.js";
 
@@ -11,6 +13,8 @@ ctx.imageSmoothingEnabled = false;
 
 const player = new Player(canvas.width, canvas.height);
 const playerProjectiles = [];
+const invadersProjectiles = [];
+const grid = new Grid(3, 5)
 
 const keys = {
     left: false,
@@ -21,8 +25,10 @@ const keys = {
     },
 }
 
-const drawPlayerProjectiles = () => {
-    playerProjectiles.forEach((projectile) => {
+const drawProjectiles = () => {
+    const projectiles = [...playerProjectiles, ...invadersProjectiles];
+
+    projectiles.forEach((projectile) => {
         projectile.draw(ctx);
         projectile.update();
         
@@ -37,11 +43,27 @@ const clearProjectiles = () => {
     })
 }
 
+const checkShootInvaders = () => {
+    grid.invaders.forEach((invader, invaderIndex) => {
+        playerProjectiles.some((projectile, projectileIndex) => {
+            if (invader.hit(projectile)) {
+                grid.invaders.splice(invaderIndex, 1);
+                playerProjectiles.splice(projectileIndex, 1); 
+            }
+        })
+    })
+}
+
 const gameLoop = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    drawPlayerProjectiles();
+    drawProjectiles();
     clearProjectiles();
+
+    checkShootInvaders();
+
+    grid.draw(ctx);
+    grid.update();
 
     ctx.save();
     ctx.translate(player.position.x + player.width / 2, player.position.y + player.height / 2);
@@ -76,7 +98,7 @@ addEventListener("keydown", (event) => {
         
     if (key === "d" || key === "ArrowRight") keys.right = true;
 
-    if (key === "enter" || key === " ") keys.shoot.pressed = true;
+    if (key === "enter") keys.shoot.pressed = true;
     
     
 }) 
@@ -88,10 +110,31 @@ addEventListener("keyup", (event) => {
     
     if (key === "d" || key === "ArrowRight") keys.right = false;
     
-    if (key === "enter" || key === " ") {
+    if (key === "enter") {
         keys.shoot.pressed = false;
         keys.shoot.released = true;
     }
 }) 
+// Adicione este trecho para disparar com o mouse:
+addEventListener("mousedown", (event) => {
+    if (event.button === 0) { // 0 é o botão esquerdo do mouse
+        keys.shoot.pressed = true;
+    }
+});
+
+addEventListener("mouseup", (event) => {
+    if (event.button === 0) {
+        keys.shoot.pressed = false;
+        keys.shoot.released = true;
+    }
+});
+
+setInterval(() => {
+    const invader = grid.getRandomInvader()
+
+    if (invader) {
+        invader.shoot(invadersProjectiles);
+    }
+}, 1000 ); 
 
 gameLoop();
