@@ -17,7 +17,7 @@ class Grid {
             for (let col = 0; col < this.cols; col++){
                 const invader = new Invader({
                     x: col * 50 + 20, // Largura do invasor // + 20 para espaçamento
-                    y: row * 37 + 20, // Altura do invasor // + 20 para espaçamento
+                    y: row * 37 + 80, // Altura do invasor // + 20 para espaçamento
                 }, this.invadersVelocity);
                 array.push(invader);
             }

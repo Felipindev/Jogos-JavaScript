@@ -10,3 +10,82 @@
 canvas {
     background-color: #121212;
 }
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    top: 0;
+    left: 0;
+}
+
+.screen h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.screen span {
+    font-size: 0.6rem;
+    margin-bottom: 1rem;
+    color: "#888";
+    margin-top: auto;
+    text-decoration: underline;
+}
+
+.start-screen > div {
+    margin-top: auto;
+}
+
+.button-play, .button-restart {
+    padding: 12px 20px;
+    background-color: #9bbe9b;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.button-play:hover, .button-restart:hover {
+    background-color: #7a9f7a;
+}
+
+.game-over {
+    scale: 0;
+    animation: zoom 2s forwards;
+}
+
+.score-ui {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    text-transform: uppercase;
+    font-size: 1rem;
+    display: none;
+}
+
+.score-ui > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+@keyframes zoom {
+    from {
+        scale: 0;
+    } to {
+        scale: 1;
+    }
+}
