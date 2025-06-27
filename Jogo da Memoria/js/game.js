@@ -1,4 +1,6 @@
 const grid = document.querySelector('.grid')
+const spanPlayer = document.querySelector('.player')
+const timer = document.querySelector('.timer')
 
 const characters = [
     'neymar',
@@ -22,12 +24,40 @@ let firstCard = ''
 let secondCard = ''
 
 const checkEndgame = () => {
-    const disabledCards = document.querySelectorAll('.disabled-card')
+    const disabledCards = document.querySelectorAll('.disabled-card');
 
     if (disabledCards.length === 20) {
-        setTimeout(() => {
-            alert('Parabéns, você conseguiu!')
-        }, 10)
+        clearInterval(this.loop);
+
+        const player = spanPlayer.innerHTML;
+        const time = timer.innerHTML;
+
+        const historico = JSON.parse(localStorage.getItem('historicoTempos')) || [];
+
+        // Adiciona o novo registro
+        historico.push({
+            player,
+            time
+        });
+
+        // Limita o array aos 10 últimos tempos
+        const MAX_REGISTROS = 10;
+        if (historico.length > MAX_REGISTROS) {
+            historico.splice(0, historico.length - MAX_REGISTROS); // remove os mais antigos
+        }
+
+        // Salva de volta
+        localStorage.setItem('historicoTempos', JSON.stringify(historico));
+
+        // exibe a tela de fim de jogo
+        const screen = document.getElementById('endgame-screen');
+        const playerSpan = document.getElementById('endgame-player');
+        const timeSpan = document.getElementById('endgame-time');
+
+        playerSpan.textContent = player;
+        timeSpan.textContent = time;
+
+        screen.classList.remove('hidden');
     }
 }
 
@@ -98,4 +128,15 @@ const loadGame = () => {
     })
 }
 
-loadGame()
+const startTimer = ()=> {
+    this.loop = setInterval(() => {
+        const currentTime = +timer.innerHTML
+        timer.innerHTML = currentTime + 1
+    }, 1000)
+}
+
+window.onload = () => {
+    spanPlayer.innerHTML = localStorage.getItem('player')
+    startTimer()
+    loadGame()
+}

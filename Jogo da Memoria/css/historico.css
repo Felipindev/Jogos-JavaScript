@@ -1,0 +1,91 @@
+body {
+    font-family: 'Press Start 2P', cursive, sans-serif;
+    background: url('../images/bg.png') center/cover no-repeat fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container-historico {
+    max-width: 500px;
+    margin: 60px auto 0 auto;
+    background: rgba(255,255,255,0.92);
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+    padding: 32px 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 24px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+#lista-historico {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+#lista-historico li {
+    margin-bottom: 12px;
+    background: #e6eaff;
+    padding: 14px 12px;
+    border-radius: 8px;
+    color: #222;
+    font-size: 0.85em;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.06);
+    transition: background 0.2s;
+    word-break: break-word;
+}
+
+#lista-historico li:nth-child(odd) {
+    background: #f7f8fa;
+}
+
+#lista-historico li:first-child {
+    font-weight: bold;
+    background: #c7e7ff;
+}
+
+.button-voltar {
+    background: #3333cc;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 28px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 8px;
+    font-family: inherit;
+    transition: background 0.2s;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
+}
+
+.button-voltar:hover {
+    background: #222299;
+}
+
+@media (max-width: 600px) {
+    .container-historico {
+        max-width: 98vw;
+        padding: 16px 4vw 18px 4vw;
+    }
+    h1 {
+        font-size: 1em;
+    }
+    #lista-historico li {
+        font-size: 0.7em;
+        padding: 10px 6px;
+    }
+    .button-voltar {
+        font-size: 0.9em;
+        padding: 10px 10vw;
+    }
+}

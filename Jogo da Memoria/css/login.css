@@ -47,9 +47,18 @@
     padding: 14px;
 }
 
-
 .login-button:disabled {
     background-color: rgb(100, 100, 255);
     color: antiquewhite;
     cursor: auto;
+}
+
+.btn-hist {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 15px;
 }

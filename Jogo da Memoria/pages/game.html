@@ -10,15 +10,25 @@
     <script defer src="../js/game.js"></script>
 </head>
 <body>
-    <div class="grid">
-        <!-- <div class="card">
-            <div class="face front">
-                
+    <main>
+        <header>
+            <span class="player"></span>
+            <span>Tempo: <span class="timer">00</span></span>
+        </header>
+        <div class="grid"></div>
+        <a href="../index.html">
+            <button class="btn-voltar">Voltar</button>
+        </a>
+    </main>
+    <div class="endgame-screen hidden" id="endgame-screen">
+        <div class="endgame-box">
+            <h2>Parabéns, <span id="endgame-player"></span>!</h2>
+            <p>Seu tempo foi de <span id="endgame-time"></span> segundos.</p>
+            <div class="buttons">
+                <button onclick="location.reload()">Jogar Novamente</button>
+                <button onclick="window.location.href='historico.html'">Ver Histórico</button>
             </div>
-            <div class="face back">
-
-            </div>
-        </div> -->
+        </div>
     </div>
 </body>
 </html>
